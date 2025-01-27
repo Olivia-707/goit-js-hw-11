@@ -1,54 +1,66 @@
 import iziToast from 'izitoast';
-import SimpleLightbox from 'simplelightbox';
 import 'izitoast/dist/css/iziToast.min.css';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import { createGalleryCardTemplate } from './js/render-functions';
-import { fetchPhotosByQuery } from './js/pixabay-api';
-const searchFormEl = document.querySelector('.js-search-form');
-const galleryEl = document.querySelector('.js-gallery');
+import xmarkSvg from './img/xmark.svg';
+import { getImages } from './js/pixabay-api';
+import { renderGallery } from './js/render-functions';
+import { gallery } from './js/render-functions';
+
+const searchForm = document.querySelector('.search-form');
 const loader = document.querySelector('.loader');
-const onSearchFormSubmit = event => {
-  event.preventDefault();
-  const searchedQuery = event.currentTarget.elements.user_query.value.trim();
-  if (searchedQuery === '') {
-    iziToast.error({
-      message: 'Please enter your request',
+
+function showLoader() {
+  loader.style.display = 'block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
+searchForm.addEventListener('submit', ev => {
+  ev.preventDefault();
+
+  gallery.innerHTML = '';
+
+  const userInputValue = ev.target.elements.search.value.trim().toLowerCase();
+
+  if (userInputValue === '') {
+    iziToast.show({
+      message: 'Input field can not be empty. Please enter your message.',
+      messageColor: '#ffffff',
+      iconUrl: xmarkSvg,
+      backgroundColor: '#ef4040',
       position: 'topRight',
     });
     return;
   }
-  loader.classList.remove('is-hidden');
-  fetchPhotosByQuery(searchedQuery)
-    .then(data => {
-      if (data.total === 0) {
-        iziToast.error({
+
+  showLoader();
+
+  getImages(userInputValue)
+    .then(images => {
+      if (images.hits.length === 0) {
+        iziToast.show({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
+          messageColor: '#ffffff',
+          iconUrl: xmarkSvg,
+          backgroundColor: '#ef4040',
           position: 'topRight',
         });
-        galleryEl.innerHTML = '';
-        searchFormEl.reset();
-        return;
       }
-      const galleryTemplate = data.hits
-        .map(el => createGalleryCardTemplate(el))
-        .join('');
-      galleryEl.innerHTML = galleryTemplate;
-      new SimpleLightbox('.js-gallery a', {
-        captionDelay: 300,
-        captionsData: 'alt',
-      });
+
+      return renderGallery(images.hits);
     })
-    .catch(err => {
-      iziToast.error({
-        message: 'Something went wrong. Please try again later.',
+    .catch(error =>
+      iziToast.show({
+        message: `${error}`,
+        messageColor: '#ffffff',
+        iconUrl: xmarkSvg,
+        backgroundColor: '#ef4040',
         position: 'topRight',
-      });
-      console.error(err);
-    })
-    .finally(() => {
-      loader.classList.add('is-hidden');
-    });
-  searchFormEl.reset();
-};
-searchFormEl.addEventListener('submit', onSearchFormSubmit);
+      })
+    )
+    .finally(() => hideLoader());
+
+  searchForm.reset();
+});
