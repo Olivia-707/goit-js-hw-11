@@ -1,6 +1,7 @@
+// main.js
+
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import xmarkSvg from './img/xmark.svg';
 import { getImages } from './js/pixabay-api';
 import { renderGallery } from './js/render-functions';
 import { gallery } from './js/render-functions';
@@ -27,7 +28,6 @@ searchForm.addEventListener('submit', ev => {
     iziToast.show({
       message: 'Input field can not be empty. Please enter your message.',
       messageColor: '#ffffff',
-      iconUrl: xmarkSvg,
       backgroundColor: '#ef4040',
       position: 'topRight',
     });
@@ -43,7 +43,6 @@ searchForm.addEventListener('submit', ev => {
           message:
             'Sorry, there are no images matching your search query. Please try again!',
           messageColor: '#ffffff',
-          iconUrl: xmarkSvg,
           backgroundColor: '#ef4040',
           position: 'topRight',
         });
@@ -55,7 +54,6 @@ searchForm.addEventListener('submit', ev => {
       iziToast.show({
         message: `${error}`,
         messageColor: '#ffffff',
-        iconUrl: xmarkSvg,
         backgroundColor: '#ef4040',
         position: 'topRight',
       })
