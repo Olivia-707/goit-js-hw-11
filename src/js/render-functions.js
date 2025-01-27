@@ -1,28 +1,49 @@
-export const createGalleryCardTemplate = imgInfo => {
-  const stats = [
-    { title: 'Likes', value: imgInfo.likes },
-    { title: 'Views', value: imgInfo.views },
-    { title: 'Comments', value: imgInfo.comments },
-    { title: 'Downloads', value: imgInfo.downloads },
-  ];
-  const statsMarkup = stats
-    .map(
-      stat => `
-        <div class="gallery-item">
-          <p class="gallery-title">${stat.title}</p>
-          <p class="gallery-count">${stat.value}</p>
-        </div>`
-    )
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+export const gallery = document.querySelector('.gallery');
+
+const modalSimpleLiteBox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
+export function renderGallery(images) {
+  const markup = images
+    .map(image => {
+      return `
+        <li class="gallery-item">
+          <a class="gallery-link" href="${image.largeImageURL}">
+            <img
+            class="gallery-image"
+            src="${image.webformatURL}"
+            alt="${image.tags}"
+            />
+          </a>
+          <div class="stat-container">
+            <div>
+                <span><b>Likes</b></span>
+                <span>${image.likes}</span>
+            </div>
+            <div>
+                <span><b>Views</b></span>
+                <span>${image.views}</span>
+            </div>
+            <div>
+                <span><b>Comments</b></span>
+                <span>${image.comments}</b></span>
+            </div>
+            <div>
+                <span><b>Downloads</b></span>
+                <span>${image.downloads}</span>
+            </div>
+          </div>
+        </li>
+    `;
+    })
     .join('');
-  return `
-    <li class="gallery-card">
-      <article class="card">
-        <a class="gallery-link" href="${imgInfo.largeImageURL}" target="_blank" rel="noopener noreferrer">
-          <img class="gallery-img" src="${imgInfo.webformatURL}" alt="${imgInfo.tags}" />
-        </a>
-        <div class="gallery-container">
-          ${statsMarkup}
-        </div>
-      </article>
-    </li>`;
-};
+  gallery.innerHTML = markup;
+
+  modalSimpleLiteBox.refresh();
+}
