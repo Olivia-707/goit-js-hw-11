@@ -2,27 +2,27 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>goit-js-hw-11</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
   <script type="module" crossorigin src="/goit-js-hw-11/index.js"></script>
-  <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-D0gBiHs0.js">
-  <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-AL2zCFOW.css">
-  <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-CmAE8sny.css">
+  <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-B2mb6eXk.js">
+  <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-Dr4k8ETB.css">
+  <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-BddsqSLo.css">
 </head>
 
 <body>
-  <div class="search-container">
-    <form id="search-form">
-      <input type="text" name="searchQuery" placeholder="Search images..." />
-      <button type="submit">Search</button>
+  <div class="container">
+    <form class="search-form js-search-form" autocomplete="off">
+      <input type="text" class="search-input js-search-input" name="user_query" placeholder="Search images..." />
+      <button type="submit" class="search-btn">Search</button>
     </form>
+    <div class="loader-container">
+      <span class="loader is-hidden"></span>
+    </div>
+    <ul class="gallery js-gallery"></ul>
   </div>
-  <span class="loader" style="display: none;"></span>
-  <div class="gallery"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 </body>
 
 </html>
