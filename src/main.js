@@ -23,7 +23,7 @@ const onSearchFormSubmit = event => {
 
   loader.classList.remove('is-hidden');
 
-  fetchPhotosByQuery(searchQuery)
+  fetchPhotosByQuery(searchedQuery)
     .then(data => {
       if (data.total === 0) {
         iziToast.error({
