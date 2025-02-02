@@ -1,21 +1,30 @@
-export function createGalleryCard({
-  webformatURL,
-  largeImageURL,
-  tags,
-  likes,
-  views,
-  comments,
-  downloads,
-}) {
+export const createGalleryCardTemplate = imgInfo => {
+  const stats = [
+    { title: 'Likes', value: imgInfo.likes },
+    { title: 'Views', value: imgInfo.views },
+    { title: 'Comments', value: imgInfo.comments },
+    { title: 'Downloads', value: imgInfo.downloads },
+  ];
+
+  const statsMarkup = stats
+    .map(
+      stat => `
+        <div class="gallery-item">
+          <p class="gallery-title">${stat.title}</p>
+          <p class="gallery-count">${stat.value}</p>
+        </div>`
+    )
+    .join('');
+
   return `
-    <a href="${largeImageURL}" class="gallery-item">
-        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
-        <div class="info">
-          <p class="info-item"><span>Likes</span><b>${likes}</b></p>
-          <p class="info-item"><span>Views</span><b>${views}</b></p>
-          <p class="info-item"><span>Comments</span><b>${comments}</b></p>
-          <p class="info-item"><span>Downloads</span><b>${downloads}</b></p>
+    <li class="gallery-card">
+      <article class="card">
+        <a class="gallery-link" href="${imgInfo.largeImageURL}" target="_blank" rel="noopener noreferrer">
+          <img class="gallery-img" src="${imgInfo.webformatURL}" alt="${imgInfo.tags}" />
+        </a>
+        <div class="gallery-container">
+          ${statsMarkup}
         </div>
-      </a>
-      `;
-}
+      </article>
+    </li>`;
+};
