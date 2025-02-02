@@ -5,8 +5,9 @@ import{i,S as d}from"./assets/vendor-B2mb6eXk.js";(function(){const a=document.c
         </div>`).join("");return`
     <li class="gallery-card">
       <article class="card">
-        <a class="gallery-link" href="${t.largeImageURL}" target="_blank" rel="noopener noreferrer">
-          <img class="gallery-img" src="${t.webformatURL}" alt="${t.tags}" />
+        <a
+        class="gallery-link" href="${t.largeImageURL}" target="_blank" rel="noopener noreferrer">
+          <img class="gallery-img" src="${t.webformURL}" alt="${t.tags}" />
         </a>
         <div class="gallery-container">
           ${r}
