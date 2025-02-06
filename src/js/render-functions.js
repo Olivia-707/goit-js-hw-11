@@ -19,8 +19,7 @@ export const createGalleryCardTemplate = imgInfo => {
   return `
     <li class="gallery-card">
       <article class="card">
-        <a
-        class="gallery-link" href="${imgInfo.largeImageURL}" target="_blank" rel="noopener noreferrer">
+        <a class="gallery-link" href="${imgInfo.largeImageURL}" target="_blank" rel="noopener noreferrer">
           <img class="gallery-img" src="${imgInfo.webformURL}" alt="${imgInfo.tags}" />
         </a>
         <div class="gallery-container">

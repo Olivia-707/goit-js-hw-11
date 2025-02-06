@@ -13,7 +13,7 @@ const onSearchFormSubmit = event => {
   event.preventDefault();
 
   const searchedQuery = event.currentTarget.elements.user_query.value.trim();
-  if (searchedQuery === ``) {
+  if (searchedQuery === '') {
     iziToast.error({
       message: 'Please enter your request',
       position: 'topRight',
@@ -28,7 +28,7 @@ const onSearchFormSubmit = event => {
       if (data.total === 0) {
         iziToast.error({
           message:
-            'Sorry, there are no images match your seartching query. Please try again!',
+            'Sorry, there are no images matching your seartch query. Please try again!',
           position: 'topRight',
         });
 
@@ -44,7 +44,7 @@ const onSearchFormSubmit = event => {
 
       new SimpleLightbox('.js-gallery a', {
         captionDelay: 300,
-        captionData: `alr`,
+        captionData: `alt`,
       });
     })
     .catch(err => {
@@ -55,7 +55,7 @@ const onSearchFormSubmit = event => {
       console.error(err);
     })
     .finally(() => {
-      loader.classList.add(`is-hidden`);
+      loader.classList.add('is-hidden');
     });
 
   searchFormEl.reset();
