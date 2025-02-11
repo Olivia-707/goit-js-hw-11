@@ -28,7 +28,7 @@ const onSearchFormSubmit = event => {
       if (data.total === 0) {
         iziToast.error({
           message:
-            'Sorry, there are no images matching your seartch query. Please try again!',
+            'Sorry, there are no images matching your search query. Please try again!',
           position: 'topRight',
         });
 
@@ -44,7 +44,7 @@ const onSearchFormSubmit = event => {
 
       new SimpleLightbox('.js-gallery a', {
         captionDelay: 300,
-        captionData: `alt`,
+        captionsData: 'alt',
       });
     })
     .catch(err => {
