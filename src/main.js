@@ -2,6 +2,8 @@ import iziToast from 'izitoast';
 import SimpleLightbox from 'simplelightbox';
 import 'izitoast/dist/css/iziToast.min.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import axios from 'axios';
+axios.defaults.baseURL = 'https://pixabay.com/api/';
 import { createGalleryCardTemplate } from './js/render-functions';
 import { fetchPhotosByQuery } from './js/pixabay-api';
 
